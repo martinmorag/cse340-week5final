@@ -1,0 +1,35 @@
+<% if (title) { %>
+    <h1><%= title %></h1>
+    <% } else {
+        res.redirect('/')
+    } %>
+    
+<% if (errors) { %>
+    <ul class="notice">
+    <% errors.array().forEach(error => { %>
+        <li><%= error.msg %></li>
+    <%  }) %>
+    </ul>
+    <% } %>
+
+<form id="updateEmailForm" action="/account/update-account" method="post">
+    <fieldset>
+        <label for="account_firstname" class="add">First Name* <input type="text" id="account_firstname" name="account_firstname" required <% if (locals.account_firstname) { %> value="<%= locals.account_firstname %>" <% } %>></label>
+        <label for="account_lastname" class="add">Last Name* <input type="text" id="account_lastname" name="account_lastname" required <% if (locals.account_lastname) { %> value="<%= locals.account_lastname %>" <% } %>></label>
+        <label for="account_email" class="add">Email* <input type="email" id="email" name="account_email" required <% if (locals.account_email) { %> value="<%= locals.account_email %>" <% } %>></label>
+        <input type="submit" value="Update Information" name="submit" class="modifyButton" disabled>
+        <input type="hidden" name="account_id"
+        <% if(locals.account_id) { %> value="<%= locals.account_id %>"
+        <% } %>>
+    </fieldset>
+</form>
+
+<form id="updatePasswordForm" action="/account/update-account" method="post">
+    <fieldset>
+        <label for="account_password" class="add">Password* <input type="password" id="password" name="account_password" required ></label>
+        <input type="submit" value="Update Password" name="submit" class="modifyButton" disabled>
+        <input type="hidden" name="account_id"
+        <% if(locals.account_id) { %> value="<%= locals.account_id %>"
+        <% } %>>
+    </fieldset>
+</form>
